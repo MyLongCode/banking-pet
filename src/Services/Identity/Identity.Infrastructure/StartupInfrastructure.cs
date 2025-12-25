@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Identity.Infrastructure.EF;
+using Identity.Infrastructure.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,8 @@ namespace Identity.Infrastructure
     {
         public static void Configure(IServiceCollection services)
         {
-            services.AddScoped(typeof(GenericRepository<>));
+            services.AddDbContext<IdentityDbContext>();
+            services.AddScoped<IUnitOfWork, EfUnitOfWork<IdentityDbContext>>();
         }
     }
 }
