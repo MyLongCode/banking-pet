@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BuildingBlocks.Abstractions
+namespace Notifications.Domain.Entities.Enums
 {
-    public interface IClock
+    public enum EmailStatus 
     {
+        Pending, Sent, Failed 
     }
 }
