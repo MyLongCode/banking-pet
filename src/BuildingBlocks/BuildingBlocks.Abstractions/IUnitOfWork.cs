@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Identity.Infrastructure.Interfaces
+namespace BuildingBlocks.Abstractions
 {
     public interface IUnitOfWork
     {
