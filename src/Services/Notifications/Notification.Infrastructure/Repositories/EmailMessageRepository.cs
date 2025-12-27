@@ -1,4 +1,5 @@
-﻿using Notifications.Domain.Entities;
+﻿using Notifications.Application.Abstractions;
+using Notifications.Domain.Entities;
 using Notifications.Infrastructure.Persistence;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Notifications.Infrastructure.Repositories
 {
-    public class EmailMessageRepository
+    public class EmailMessageRepository : IEmailMessageRepository
     {
         private readonly NotificationsDbContext _db;
 

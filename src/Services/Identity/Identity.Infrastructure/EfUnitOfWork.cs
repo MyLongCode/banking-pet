@@ -1,4 +1,5 @@
-﻿using Identity.Infrastructure.Interfaces;
+﻿using BuildingBlocks.Abstractions.Interfaces;
+using Identity.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

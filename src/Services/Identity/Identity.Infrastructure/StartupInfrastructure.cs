@@ -1,4 +1,5 @@
-﻿using Identity.Infrastructure.EF;
+﻿using BuildingBlocks.Abstractions.Interfaces;
+using Identity.Infrastructure.EF;
 using Identity.Infrastructure.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
