@@ -29,6 +29,7 @@ namespace Notifications.Infrastructure.Services
             {
                 IsBodyHtml = true
             };
+
             await client.SendMailAsync(message, ct);
         }
     }
