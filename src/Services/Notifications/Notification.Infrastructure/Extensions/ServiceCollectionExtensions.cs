@@ -1,11 +1,13 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using BuildingBlocks.Abstractions.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Internal;
 using Notifications.Application.Abstractions;
 using Notifications.Infrastructure.Options;
 using Notifications.Infrastructure.Persistence;
 using Notifications.Infrastructure.Repositories;
 using Notifications.Infrastructure.Services;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +29,9 @@ namespace Notifications.Infrastructure.Extensions
             services.Configure<SmtpOptions>(config.GetSection("Smtp"));
 
             services.AddScoped<IEmailMessageRepository, EmailMessageRepository>();
+            services.AddScoped<IUnitOfWork, EfUnitOfWork>();
+            services.AddSingleton<IClock, Services.SystemClock>();
+
 
             return services;
         }

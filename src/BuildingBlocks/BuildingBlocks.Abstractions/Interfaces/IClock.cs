@@ -8,5 +8,6 @@ namespace BuildingBlocks.Abstractions.Interfaces
 {
     public interface IClock
     {
+        DateTimeOffset Now {  get; }
     }
 }
