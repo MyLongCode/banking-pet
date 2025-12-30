@@ -13,7 +13,11 @@ builder.Services.AddNotificationsInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
-app.UseSwagger();
+app.UseSwagger()
+       .UseSwaggerUI(c =>
+       {
+           c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+       });
 app.UseSwaggerUI();
 
 app.MapControllers();                           

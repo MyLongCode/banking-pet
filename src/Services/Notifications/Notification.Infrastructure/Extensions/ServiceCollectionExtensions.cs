@@ -29,6 +29,7 @@ namespace Notifications.Infrastructure.Extensions
             services.Configure<SmtpOptions>(config.GetSection("Smtp"));
 
             services.AddScoped<IEmailMessageRepository, EmailMessageRepository>();
+            services.AddScoped<IEmailSender, SmtpEmailSender>();
             services.AddScoped<IUnitOfWork, EfUnitOfWork>();
             services.AddSingleton<IClock, Services.SystemClock>();
 
