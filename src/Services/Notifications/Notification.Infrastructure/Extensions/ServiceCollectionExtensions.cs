@@ -30,7 +30,7 @@ namespace Notifications.Infrastructure.Extensions
 
             services.AddScoped<IEmailMessageRepository, EmailMessageRepository>();
             services.AddScoped<IEmailSender, SmtpEmailSender>();
-            services.AddScoped<IUnitOfWork, EfUnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<IClock, Services.SystemClock>();
 
 

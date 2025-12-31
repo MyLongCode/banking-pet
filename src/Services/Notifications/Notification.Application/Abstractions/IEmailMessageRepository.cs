@@ -11,8 +11,8 @@ namespace Notifications.Application.Abstractions
 {
     public interface IEmailMessageRepository
     {
-        Task AddAsync(EmailMessage emailMessage, CancellationToken ct);
-        Task<EmailMessage?> GetByIdAsync(int id, CancellationToken ct);
-        Task<IEnumerable<EmailMessage>> GetList(Expression<Func<EmailMessage, bool>> predicate);
+        Task AddAsync(EmailNotification emailMessage, CancellationToken ct);
+        Task<EmailNotification?> GetByIdAsync(int id, CancellationToken ct);
+        Task<IEnumerable<EmailNotification>> GetList(Expression<Func<EmailNotification, bool>> predicate);
     }
 }

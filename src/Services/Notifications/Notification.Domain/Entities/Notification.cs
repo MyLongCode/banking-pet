@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Notifications.Domain.Entities.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace Notifications.Domain.Entities
         public string Title { get; protected set; }
         public string Message { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
+        public DateTime UpdatedAt { get; protected set; }
         public bool IsSent { get; protected set; }
 
         public abstract NotificationType Type { get; }
@@ -28,5 +30,8 @@ namespace Notifications.Domain.Entities
         }
 
         public abstract void Validate();
+
+        public void SetCreatedAt(DateTime createdAt) { CreatedAt = createdAt; }
+        public void SetUpdatedAt(DateTime updatedAt) { UpdatedAt = updatedAt; }
     }
 }

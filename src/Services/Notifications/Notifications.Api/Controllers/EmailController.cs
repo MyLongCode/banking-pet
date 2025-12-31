@@ -2,7 +2,6 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Notifications.Api.Models.Email.Requests;
 using Notifications.Api.Models.Email.Responses;
-using Notifications.Application.Features.SendEmail;
 
 namespace Notifications.Api.Controllers;
 

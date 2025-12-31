@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using Notifications.Application.Abstractions;
+using Notifications.Domain.Entities;
 using Notifications.Infrastructure.Options;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace Notifications.Infrastructure.Services
 {
-    public sealed class SmtpEmailSender : IEmailSender
+    public sealed class SmtpSender : IEmailSender
     {
         private readonly SmtpOptions _opt;
 
-        public SmtpEmailSender(IOptions<SmtpOptions> opt) => _opt = opt.Value;
+        public SmtpSender(IOptions<SmtpOptions> opt) => _opt = opt.Value;
 
-        public async Task SendAsync(string to, string subject, string body, CancellationToken ct)
+        public async Task SendAsync(EmailNotification notification)
         {
             using var client = new SmtpClient(_opt.Host, _opt.Port)
             {
@@ -25,12 +26,12 @@ namespace Notifications.Infrastructure.Services
                 Credentials = new NetworkCredential(_opt.User, _opt.Password),
             };
 
-            using var message = new MailMessage(_opt.From, to, subject, body)
+            using var message = new MailMessage(_opt.From, notification.Recipient, notification.Subject, notification.Message)
             {
                 IsBodyHtml = true
             };
 
-            await client.SendMailAsync(message, ct);
+            await client.SendMailAsync(message);
         }
     }
 }

@@ -12,18 +12,19 @@ namespace Notifications.Application
 {
     public class NotificationFactory : INotificationFactory
     {
-        public Notification CreateNotification(NotificationType type, string recipient, string title, string message, Dictionary<string, object>? metadata = null)
+        public Notification CreateNotification(
+            NotificationType type,
+            string recipient,
+            string title,
+            string message,
+            Dictionary<string, object>? metadata = null)
         {
-            
-        }
-
-        static NotificationFactory GetNotificationFactory(string notificationType)
-        {
-            var factoryName = $"FactoryMethod.Factories.{notificationType}MessageFactory";
-            var assembly = Assembly.GetExecutingAssembly();
-            Type factoryType = assembly.GetType(factoryName);
-            if (factoryType == null) throw new NotSupportedException($"Factory for {notificationType} notification is not found");
-            return (NotificationFactory)Activator.CreateInstance(factoryType);
+            return type switch
+            {
+                NotificationType.Email =>
+                    new EmailNotification(recipient, title, message, metadata),
+                _ => throw new ArgumentException($"Unsupported notification type: {type}")
+            };
         }
     }
 }
