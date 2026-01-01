@@ -8,23 +8,17 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Notifications.Application
+namespace Notifications.Application.Abstractions
 {
-    public class NotificationFactory : INotificationFactory
+    public interface INotificationFactory
     {
         public Notification CreateNotification(
             NotificationType type,
             string recipient,
             string title,
             string message,
-            Dictionary<string, object>? metadata = null)
-        {
-            return type switch
-            {
-                NotificationType.Email =>
-                    new EmailNotification(recipient, title, message, metadata),
-                _ => throw new ArgumentException($"Unsupported notification type: {type}")
-            };
-        }
+            Dictionary<string, object>? metadata = null);
+
+        public Task SendAsync(Notification notification);
     }
 }

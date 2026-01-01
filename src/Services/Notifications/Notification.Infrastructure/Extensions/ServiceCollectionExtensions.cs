@@ -1,9 +1,12 @@
-﻿using BuildingBlocks.Abstractions.Interfaces;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Internal;
 using Notifications.Application.Abstractions;
+using Notifications.Application.NotificationFactories;
+using Notifications.Domain.Entities.Enums;
+using Notifications.Domain.Interfaces;
+using Notifications.Infrastructure.NotificationFactories;
 using Notifications.Infrastructure.Options;
 using Notifications.Infrastructure.Persistence;
 using Notifications.Infrastructure.Repositories;
@@ -25,14 +28,18 @@ namespace Notifications.Infrastructure.Extensions
                 var cs = config.GetConnectionString("NotificationsDb");
                 opt.UseNpgsql(cs);
             });
-
+            services.AddScoped<EmailNotificationFactory>();
             services.Configure<SmtpOptions>(config.GetSection("Smtp"));
-
-            services.AddScoped<IEmailMessageRepository, EmailMessageRepository>();
-            services.AddScoped<IEmailSender, SmtpEmailSender>();
+            services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddSingleton<IClock, Services.SystemClock>();
+            services.AddScoped<INotificationFactoryResolver>(sp =>
+            {
+                var resolver = new NotificationFactoryResolver(sp);
 
+                resolver.RegisterFactory(NotificationType.Email, typeof(EmailNotificationFactory));
+
+                return resolver;
+            });
 
             return services;
         }

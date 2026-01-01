@@ -11,6 +11,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddNotificationsApplication();
 builder.Services.AddNotificationsInfrastructure(builder.Configuration);
 
+
 var app = builder.Build();
 
 app.UseSwagger()

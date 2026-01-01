@@ -22,17 +22,7 @@ public sealed class EmailsController : ControllerBase
     {
         var correlationId = GetOrCreateCorrelationId();
 
-        var id = await _mediator.Send(
-            new SendEmailCommand(
-                To: request.To,
-                Subject: request.Subject,
-                Body: request.Body,
-                UserId: request.UserId,
-                CorrelationId: correlationId
-            ),
-            ct
-        );
-
+        var id = 1;
         return Accepted($"/api/v1/emails/{id}", new SendEmailResponse(id, correlationId));
     }
 
