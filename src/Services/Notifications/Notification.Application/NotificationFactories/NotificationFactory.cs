@@ -16,7 +16,7 @@ namespace Notifications.Application.NotificationFactories
             string recipient,
             string title,
             string message,
-            Dictionary<string, object>? metadata = null);
+            List<string>? metadata = null);
 
         public abstract Task SendAsync(Notification notification);
     }

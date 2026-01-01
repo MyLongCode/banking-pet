@@ -27,7 +27,7 @@ namespace Notifications.Application.UseCases
             string recipient,
             string title,
             string message,
-            Dictionary<string, object>? metadata = null)
+            List<string>? metadata = null)
         {
             var factory = _factoryResolver.Resolve(type);
             var notification = factory.CreateNotification(

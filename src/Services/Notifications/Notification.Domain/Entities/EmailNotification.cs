@@ -14,29 +14,29 @@ namespace Notifications.Domain.Entities
     {
         public string? Subject { get; private set; }
         public string? HtmlContent { get; private set; }
-        public List<string>? Attachments { get; private set; }
-
-        public override NotificationType Type => NotificationType.Email;
+        public List<string>? AttachmentPaths { get; private set; }
+        public Guid NotificationId { get; set; }
+        public Notification Notification { get; set; } = null!;
 
         public EmailNotification(
-             string recipient,
-             string title,
-             string message,
-             Dictionary<string, object>? metadata = null)
-             : base(recipient, title, message)
+            string recipient,
+            string title,
+            string message,
+            string? subject = null,
+            string? htmlContent = null,
+            List<string>? attachmentPaths = null)
+            : base(recipient, title, message)
         {
-            if (metadata != null)
-            {
-                Subject = metadata.TryGetValue("Subject", out var subject) ? subject.ToString() : null;
-                HtmlContent = metadata.TryGetValue("HtmlContent", out var html) ? html.ToString() : null;
-                Attachments = metadata.TryGetValue("Attachments", out var attachments)
-                    ? (attachments as List<string>) : null;
-            }
+            Subject = subject ?? title;
+            HtmlContent = htmlContent;
+            AttachmentPaths = attachmentPaths;
         }
         public override void Validate()
         {
-            if (!Recipient.Contains('@')) throw new ArgumentException("This address not valid");
-            if (string.IsNullOrEmpty(Title)) throw new ArgumentException("Title is required");
+            base.Validate();
+
+            if (!Recipient.Contains("@"))
+                throw new ArgumentException("Invalid email address");
         }
     }
 }

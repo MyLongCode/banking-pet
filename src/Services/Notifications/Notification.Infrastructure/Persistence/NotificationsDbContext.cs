@@ -1,11 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Notifications.Domain.Entities;
 using Notifications.Domain.Entities.Enums;
+using System.IO;
 
 namespace Notifications.Infrastructure.Persistence
 {
     public class NotificationsDbContext : DbContext
     {
+        public NotificationsDbContext()
+        {
+        }
+
         public NotificationsDbContext(DbContextOptions<NotificationsDbContext> options)
             : base(options)
         {
@@ -13,15 +19,27 @@ namespace Notifications.Infrastructure.Persistence
 
         public DbSet<Notification> Notifications { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                var configuration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json")
+                    .AddJsonFile("appsettings.Development.json", optional: true)
+                    .AddEnvironmentVariables()
+                    .Build();
+
+                var connectionString = configuration.GetConnectionString("NotificationsDb");
+                optionsBuilder.UseNpgsql(connectionString);
+            }
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(NotificationsDbContext).Assembly);
-
-            modelBuilder.Entity<Notification>()
-                .HasDiscriminator<NotificationType>("NotificationType")
-                .HasValue<EmailNotification>(NotificationType.Email);
 
             modelBuilder.Entity<Notification>()
                 .HasIndex(n => n.Recipient)

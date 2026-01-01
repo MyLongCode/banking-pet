@@ -17,7 +17,7 @@ namespace Notifications.Application.Abstractions
             string recipient,
             string title,
             string message,
-            Dictionary<string, object>? metadata = null);
+            List<string>? metadata = null);
 
         public Task SendAsync(Notification notification);
     }

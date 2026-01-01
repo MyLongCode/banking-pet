@@ -20,8 +20,8 @@ namespace Notifications.Infrastructure.NotificationFactories
 
         public Notification CreateNotification(
             NotificationType type, string recipient, string title, 
-            string message, Dictionary<string, object>? metadata = null
-            ) => new EmailNotification(recipient, title, message, metadata);
+            string message, List<string>? metadata = null
+            ) => new EmailNotification(recipient, title, message);
 
         public async Task SendAsync(Notification notification)
         {
