@@ -18,6 +18,6 @@ namespace Notifications.Application.NotificationFactories
             string message,
             List<string>? metadata = null);
 
-        public abstract Task SendAsync(Notification notification);
+        public abstract Task SendAsync(Notification notification, CancellationToken ct);
     }
 }

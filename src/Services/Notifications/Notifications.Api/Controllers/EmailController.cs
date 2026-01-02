@@ -2,6 +2,8 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Notifications.Api.Models.Email.Requests;
 using Notifications.Api.Models.Email.Responses;
+using Notifications.Application.Handlers.Commands;
+using Notifications.Domain.Entities.Enums;
 
 namespace Notifications.Api.Controllers;
 
@@ -22,7 +24,14 @@ public sealed class EmailsController : ControllerBase
     {
         var correlationId = GetOrCreateCorrelationId();
 
-        var id = 1;
+        var id = await _mediator.Send(new CreateNotificationCommand(
+            Type: NotificationType.Email,
+            Recipient: request.To,
+            Title: request.Subject,
+            Message: request.Body,
+            null
+        ), ct);
+
         return Accepted($"/api/v1/emails/{id}", new SendEmailResponse(id, correlationId));
     }
 

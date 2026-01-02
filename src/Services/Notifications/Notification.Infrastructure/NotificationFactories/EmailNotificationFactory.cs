@@ -23,7 +23,7 @@ namespace Notifications.Infrastructure.NotificationFactories
             string message, List<string>? metadata = null
             ) => new EmailNotification(recipient, title, message);
 
-        public async Task SendAsync(Notification notification)
+        public async Task SendAsync(Notification notification, CancellationToken ct)
         {
             await _emailSender.SendAsync((EmailNotification)notification);
         }

@@ -28,18 +28,25 @@ namespace Notifications.Infrastructure.Extensions
                 var cs = config.GetConnectionString("NotificationsDb");
                 opt.UseNpgsql(cs);
             });
+            services.AddScoped<IEmailSender, SmtpSender>();
+
             services.AddScoped<EmailNotificationFactory>();
-            services.Configure<SmtpOptions>(config.GetSection("Smtp"));
+            services.AddScoped<INotificationFactory, EmailNotificationFactory>();
+
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddScoped<INotificationFactoryResolver>(sp =>
             {
                 var resolver = new NotificationFactoryResolver(sp);
-
                 resolver.RegisterFactory(NotificationType.Email, typeof(EmailNotificationFactory));
-
                 return resolver;
             });
+            services.AddOptions<SmtpOptions>()
+                .BindConfiguration("Smtp")
+                .Validate(o => !string.IsNullOrWhiteSpace(o.From), "Smtp:From is required")
+                .Validate(o => !string.IsNullOrWhiteSpace(o.Host), "Smtp:Host is required")
+                .ValidateOnStart();
 
             return services;
         }

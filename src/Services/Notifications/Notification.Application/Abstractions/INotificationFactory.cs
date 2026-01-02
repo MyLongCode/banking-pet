@@ -19,6 +19,6 @@ namespace Notifications.Application.Abstractions
             string message,
             List<string>? metadata = null);
 
-        public Task SendAsync(Notification notification);
+        public Task SendAsync(Notification notification, CancellationToken ct);
     }
 }
