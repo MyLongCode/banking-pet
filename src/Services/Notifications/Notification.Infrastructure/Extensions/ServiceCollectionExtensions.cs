@@ -29,6 +29,7 @@ namespace Notifications.Infrastructure.Extensions
                 opt.UseNpgsql(cs);
             });
             services.AddScoped<IEmailSender, SmtpSender>();
+            services.AddScoped<ITelegramSender, TelegramSender>();
 
             services.AddScoped<EmailNotificationFactory>();
             services.AddScoped<INotificationFactory, EmailNotificationFactory>();
