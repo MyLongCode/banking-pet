@@ -1,5 +1,7 @@
 
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Notifications.Api;
 using Notifications.Application.Extensions;
 using Notifications.Infrastructure.Extensions;
 using Notifications.Infrastructure.Persistence;
@@ -9,7 +11,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();              
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+var mapperConfig = new MapperConfiguration(x =>
+{
+    x.AddProfile(new NotificationMappingProfile());
+});
 
+var mapper = mapperConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
 builder.Services.AddNotificationsApplication();
 builder.Services.AddNotificationsInfrastructure(builder.Configuration);
 

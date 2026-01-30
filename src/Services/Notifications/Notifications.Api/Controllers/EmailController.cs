@@ -1,3 +1,4 @@
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Notifications.Api.Models.Email.Requests;
@@ -12,10 +13,12 @@ namespace Notifications.Api.Controllers;
 public sealed class EmailsController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
-    public EmailsController(IMediator mediator)
+    public EmailsController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     [HttpPost("send")]
@@ -33,6 +36,21 @@ public sealed class EmailsController : ControllerBase
         ), ct);
 
         return Accepted($"/api/v1/emails/{id}", new SendEmailResponse(id, correlationId));
+    }
+
+    [HttpGet("")]
+    [ProducesResponseType(typeof(GetEmailResponse), StatusCodes.Status202Accepted)]
+    public async Task<IActionResult> Get(DateTime from, DateTime to, CancellationToken ct)
+    {
+        var correlationId = GetOrCreateCorrelationId();
+
+        var notifications = await _mediator.Send(new GetNotificationCommand(
+            Type: NotificationType.Email,
+            From: from,
+            To: to
+        ), ct);
+
+        return Ok(_mapper.Map<IEnumerable<GetEmailResponse>>(notifications));
     }
 
     private string GetOrCreateCorrelationId()
