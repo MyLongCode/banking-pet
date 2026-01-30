@@ -39,8 +39,9 @@ namespace Notifications.Infrastructure.Repositories
             NotificationType type, CancellationToken cancellationToken = default)
         {
             return await _context.Notifications
-                .Where(n => EF.Property<NotificationType>(n, "NotificationType") == type)
+                .Where(n => n.Type == type)
                 .ToListAsync(cancellationToken);
+
         }
 
         public async Task<IEnumerable<Notification>> GetPendingAsync(
