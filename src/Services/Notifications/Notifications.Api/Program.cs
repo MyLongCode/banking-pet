@@ -1,6 +1,8 @@
 
+using Microsoft.EntityFrameworkCore;
 using Notifications.Application.Extensions;
 using Notifications.Infrastructure.Extensions;
+using Notifications.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +12,6 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddNotificationsApplication();
 builder.Services.AddNotificationsInfrastructure(builder.Configuration);
-
 
 var app = builder.Build();
 
