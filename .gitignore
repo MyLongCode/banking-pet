@@ -350,6 +350,8 @@ ASALocalRun/
 # Local History for Visual Studio
 .localhistory/
 
+**/appsettings*.json
+**/appsettings*.json.user
 # BeatPulse healthcheck temp database
 healthchecksdb
 
@@ -361,3 +363,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/src/Services/Notifications/Notifications.Api/appsettings.json
