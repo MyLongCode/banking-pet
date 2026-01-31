@@ -38,6 +38,33 @@ public sealed class EmailsController : ControllerBase
         return Accepted($"/api/v1/emails/{id}", new SendEmailResponse(id, correlationId));
     }
 
+    [HttpPost("send/batch")]
+    public async Task<ActionResult<BatchNotificationResult>> CreateBatch(
+        [FromBody] CreateBatchRequest request,
+        CancellationToken ct)
+    {
+        var command = new CreateBatchNotificationsCommand
+        {
+            Items = request.Items.Select(i => new CreateNotificationItem
+            {
+                Type = i.Type,
+                Recipient = i.Recipient,
+                Title = i.Title,
+                Message = i.Message,
+                Metadata = i.Metadata
+            }).ToList(),
+            UseTransaction = request.UseTransaction,
+            MaxDegreeOfParallelism = request.MaxDegreeOfParallelism
+        };
+
+        var result = await _mediator.Send(command, ct);
+
+        if (result.FailedCount > 0)
+            return Accepted(result); // 202 Accepted - частичный успех
+
+        return Ok(result);
+    }
+
     [HttpGet("")]
     [ProducesResponseType(typeof(GetEmailResponse), StatusCodes.Status202Accepted)]
     public async Task<IActionResult> Get(DateTime from, DateTime to, CancellationToken ct)
