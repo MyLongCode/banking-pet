@@ -72,6 +72,7 @@ namespace Notifications.Infrastructure.Repositories
             Notification notification, CancellationToken cancellationToken = default)
         {
             await _context.Notifications.AddAsync(notification, cancellationToken);
+            await _context.SaveChangesAsync();
         }
 
         public async Task AddRangeAsync(

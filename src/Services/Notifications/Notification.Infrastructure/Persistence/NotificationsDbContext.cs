@@ -18,6 +18,7 @@ namespace Notifications.Infrastructure.Persistence
         }
 
         public DbSet<Notification> Notifications { get; set; }
+        public DbSet<EmailNotification> EmailNotifications { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

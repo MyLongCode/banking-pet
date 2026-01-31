@@ -14,12 +14,9 @@ namespace Notifications.Application.Handlers
     public class GetNotificationHandler : IRequestHandler<GetNotificationCommand, IEnumerable<Notification>>
     {
         private readonly INotificationRepository _repo;
-        private readonly INotificationFactoryResolver _factoryResolver;
-
-        public GetNotificationHandler(INotificationRepository repo, INotificationFactoryResolver factoryResolver)
+        public GetNotificationHandler(INotificationRepository repo)
         {
             _repo = repo;
-            _factoryResolver = factoryResolver;
         }
 
         public async Task<IEnumerable<Notification>> Handle(GetNotificationCommand request, CancellationToken ct)

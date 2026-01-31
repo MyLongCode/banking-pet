@@ -15,8 +15,6 @@ namespace Notifications.Domain.Entities
         public string? Subject { get; private set; }
         public string? HtmlContent { get; private set; }
         public List<string>? AttachmentPaths { get; private set; }
-        public Guid NotificationId { get; set; }
-        public Notification Notification { get; set; } = null!;
 
         public EmailNotification(
             string recipient,
