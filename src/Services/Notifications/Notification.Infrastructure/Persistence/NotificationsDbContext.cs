@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Notifications.Domain.Entities;
 using Notifications.Domain.Entities.Enums;
+using Notifications.Domain.Entities.NotificationTemplates;
 using System.IO;
 
 namespace Notifications.Infrastructure.Persistence
@@ -19,6 +20,13 @@ namespace Notifications.Infrastructure.Persistence
 
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<EmailNotification> EmailNotifications { get; set; }
+
+        #region Шаблоны уведомлений
+
+        public DbSet<NotificationTemplate> NotificationTemplates { get; set; }
+        public DbSet<TemplateVersion> TemplateVersions{ get; set; }
+        public DbSet<TemplateVariable> TemplateVariables{ get; set; }
+        #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -16,7 +16,7 @@ namespace Notifications.Domain.Entities.NotificationTemplates
         public Guid TemplateId { get; set; }
         public NotificationTemplate Template { get; set; }
         public string Version { get; set; }
-        public string Languate { get; set; }
+        public string Language { get; set; }
         public NotificationTemplateVersionCategory Category { get; set; } = NotificationTemplateVersionCategory.Draft;
         public JsonElement Content { get; set; }
         public void Publish() => this.Category = NotificationTemplateVersionCategory.Active;
