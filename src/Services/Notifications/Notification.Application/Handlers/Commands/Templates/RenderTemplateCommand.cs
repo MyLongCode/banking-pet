@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Notifications.Domain.Entities.NotificationTemplates;
+using Notifications.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,5 @@ namespace Notifications.Application.Handlers.Commands.Templates
 {
     public record RenderTemplateCommand(
         TemplateVersion Template,
-        Dictionary<string, object> Variables,
-        NotificationChannel Channel) : IRequest<RenderedTemplate>;
+        Dictionary<string, object> Variables) : IRequest<RenderedTemplate>;
 }

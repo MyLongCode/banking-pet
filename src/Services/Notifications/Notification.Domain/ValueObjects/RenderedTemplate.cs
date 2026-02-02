@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Notifications.Domain.ValueObjects
 {
-    internal class RenderedTemplate
+    public class RenderedTemplate
     {
         public string Content { get; private set; }
         public RenderedTemplate(string content) => Content = content;

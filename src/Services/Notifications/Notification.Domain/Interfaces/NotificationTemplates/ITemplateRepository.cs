@@ -9,7 +9,7 @@ namespace Notifications.Domain.Interfaces.NotificationTemplates
 {
     public interface ITemplateRepository
     {
-        Task<NotificationTemplate> FindByCodeAsync(string code, string language);
+        Task<NotificationTemplate> FindByCodeAsync(string code);
         Task AddAsync(NotificationTemplate notificationTemplate);
         Task UpdateAsync(NotificationTemplate notificationTemplate);
     }

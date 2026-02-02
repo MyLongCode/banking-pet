@@ -25,10 +25,10 @@ namespace Notifications.Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<NotificationTemplate> FindByCodeAsync(string code, string language)
+        public async Task<NotificationTemplate> FindByCodeAsync(string code)
         {
             return await _context.NotificationTemplates
-                .FirstOrDefaultAsync(x => x.Code == code && x.DefaultLanguage == language);
+                .FirstOrDefaultAsync(x => x.Code == code);
         }
 
         public Task UpdateAsync(NotificationTemplate notificationTemplate)

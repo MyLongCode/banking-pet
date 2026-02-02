@@ -10,5 +10,6 @@ namespace Notifications.Application.Handlers.Commands.Templates
 {
     public record GetTemplateQuery(
         string TemplateCode,
+        string Version,
         string Language) : IRequest<TemplateVersion>;
 }
