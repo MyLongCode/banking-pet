@@ -9,9 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Notifications.Application.Handlers
+namespace Notifications.Application.Handlers.Notifications
 {
-    public class GetNotificationHandler : IRequestHandler<GetNotificationCommand, IEnumerable<Notification>>
+    public class GetNotificationHandler : IRequestHandler<GetNotificationQuery, IEnumerable<Notification>>
     {
         private readonly INotificationRepository _repo;
         public GetNotificationHandler(INotificationRepository repo)
@@ -19,10 +19,10 @@ namespace Notifications.Application.Handlers
             _repo = repo;
         }
 
-        public async Task<IEnumerable<Notification>> Handle(GetNotificationCommand request, CancellationToken ct)
+        public async Task<IEnumerable<Notification>> Handle(GetNotificationQuery request, CancellationToken ct)
         {
             //добавить обработку дат
-            return (await _repo.GetByTypeAsync(request.Type, ct));
+            return await _repo.GetByTypeAsync(request.Type, ct);
         }
     }
 }

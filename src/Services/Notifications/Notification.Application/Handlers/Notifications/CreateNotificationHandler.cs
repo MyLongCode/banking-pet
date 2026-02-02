@@ -11,7 +11,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Notifications.Application.Handlers
+namespace Notifications.Application.Handlers.Notifications
 {
     public sealed class CreateNotificationHandler : IRequestHandler<CreateNotificationCommand, Guid>
     {

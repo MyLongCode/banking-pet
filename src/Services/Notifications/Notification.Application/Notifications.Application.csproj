@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Notification.Domain\Notifications.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Handlers\Templates\" />
+  </ItemGroup>
+
 </Project>

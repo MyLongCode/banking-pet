@@ -71,7 +71,7 @@ public sealed class EmailsController : ControllerBase
     {
         var correlationId = GetOrCreateCorrelationId();
 
-        var notifications = await _mediator.Send(new GetNotificationCommand(
+        var notifications = await _mediator.Send(new GetNotificationQuery(
             Type: NotificationType.Email,
             From: from,
             To: to

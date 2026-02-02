@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Notifications.Application.Handlers.Commands
 {
-    public sealed record GetNotificationCommand
+    public sealed record GetNotificationQuery
     (
         NotificationType Type,
         DateTime From,
