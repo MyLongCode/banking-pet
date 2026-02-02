@@ -9,6 +9,6 @@ using System.Threading.Tasks;
 namespace Notifications.Application.Handlers.Commands.Templates
 {
     public record ValidateVariablesCommand(
-    TemplateVersion Template,
-    Dictionary<string, object> Variables) : IRequest<ValidationResult>;
+        TemplateVersion Template,
+        Dictionary<string, object> Variables) : IRequest<ValidationResult>;
 }
