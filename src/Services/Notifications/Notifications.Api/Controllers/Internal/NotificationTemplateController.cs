@@ -38,5 +38,20 @@ namespace Notifications.Api.Controllers.Internal
                 ), ct);
             return Ok(templateVerison);
         }
+
+        [HttpPost("")]
+        public async Task<IActionResult> CreateTemplate([FromBody] CreateTemplateCommand command, CancellationToken ct)
+        {
+            var templateId = await _mediator.Send(command, ct);
+            return CreatedAtAction(nameof(GetTemplateVersions), new { code = command.Code }, templateId);
+        }
+
+        [HttpPost("version")]
+        public async Task<IActionResult> CreateTemplateVersion([FromBody] CreateTemplateVersionCommand command, CancellationToken ct)
+        {
+            var versionId = await _mediator.Send(command, ct);
+            return CreatedAtAction("CreateTemplateVersion", versionId);
+        }
+
     }
 }

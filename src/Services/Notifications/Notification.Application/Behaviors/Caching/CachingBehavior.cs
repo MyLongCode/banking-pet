@@ -11,10 +11,9 @@ using System.Threading.Tasks;
 namespace Notifications.Application.Behaviors.Caching
 {
     public class CachingBehavior<TRequest, TResponse>(
-    ILogger<CachingBehavior<TRequest, TResponse>> logger,
-    IDistributedCache cache
-    )
-    : IPipelineBehavior<TRequest, TResponse>
+        ILogger<CachingBehavior<TRequest, TResponse>> logger,
+        IDistributedCache cache
+    ) : IPipelineBehavior<TRequest, TResponse>
     where TRequest : ICacheable
     {
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
