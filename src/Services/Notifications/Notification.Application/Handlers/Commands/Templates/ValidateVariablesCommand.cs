@@ -10,5 +10,5 @@ namespace Notifications.Application.Handlers.Commands.Templates
 {
     public record ValidateVariablesCommand(
         TemplateVersion Template,
-        Dictionary<string, object> Variables) : IRequest<ValidationResult>;
+        Dictionary<string, object> Variables) : IRequest<Guid>;
 }

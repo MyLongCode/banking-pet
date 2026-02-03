@@ -25,6 +25,7 @@ namespace Notifications.Application.Handlers.Templates
                 Language = request.Language,
                 Category = request.Category,
                 Content = request.Content,
+                Created = DateTime.UtcNow
             };
             await _repo.AddAsync(version);
             return version.Id;

@@ -26,7 +26,7 @@ namespace Notifications.Application.Handlers.Templates
                 Name = request.Name,
                 DefaultLanguage = request.DefaultLanguage,
                 Description = request.Description,
-                Created = DateTime.Now
+                Created = DateTime.UtcNow
             };
             await _templateRepository.AddAsync(template);
             return template.Id;

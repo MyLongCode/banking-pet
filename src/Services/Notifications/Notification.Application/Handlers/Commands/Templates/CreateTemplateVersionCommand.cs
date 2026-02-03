@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Notifications.Application.Handlers.Commands.Templates
 {
     public sealed record CreateTemplateVersionCommand(
-        Guid TemplateId
+        Guid TemplateId,
         string Version,
         string Language,
         JsonElement Content,
