@@ -13,6 +13,7 @@ namespace Notifications.Domain.Interfaces.NotificationTemplates
         Task<IEnumerable<TemplateVersion>> GetActiveVersionsByTemplateAsync(Guid templateId);
         Task AddRangeAsync(List<TemplateVersion> versions);
         Task AddAsync(TemplateVersion templateVersion);
+        Task<IEnumerable<TemplateVersion>> GetAllByTemplateIdAsync(Guid templateId);
 
     }
 }

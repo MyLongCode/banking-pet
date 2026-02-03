@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace Notifications.Application.Handlers.Commands.Templates
 {
-    public record GetAllTemplateVersionsQuery() : IRequest<IEnumerable<TemplateVersion>>
+    public record GetAllTemplateVersionsQuery(string TemplateCode) : IRequest<IEnumerable<TemplateVersion>>
 }

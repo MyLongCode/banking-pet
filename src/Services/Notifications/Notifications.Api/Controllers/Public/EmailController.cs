@@ -60,7 +60,7 @@ public sealed class EmailsController : ControllerBase
         var result = await _mediator.Send(command, ct);
 
         if (result.FailedCount > 0)
-            return Accepted(result); // 202 Accepted - частичный успех
+            return Accepted(result);
 
         return Ok(result);
     }

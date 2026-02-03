@@ -19,9 +19,12 @@ namespace Notifications.Application.Handlers.Templates
             _versionRepo = versionRepo;
             _templateRepo = templateRepo;
         }
-        public Task<IEnumerable<TemplateVersion>> Handle(GetAllTemplateVersionsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<TemplateVersion>> Handle(GetAllTemplateVersionsQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var template = await _templateRepo.FindByCodeAsync(request.TemplateCode);
+            if (template == null) throw new Exception("Template not found");
+
+            return await _versionRepo.GetAllByTemplateIdAsync(template.Id);
         }
     }
 }

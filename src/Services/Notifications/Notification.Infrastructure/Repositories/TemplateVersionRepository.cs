@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Notifications.Domain.Entities.NotificationTemplates;
-using Notifications.Domain.Enums;
+using Notifications.Domain.Entities.NotificationTemplates.Enums;
 using Notifications.Domain.Interfaces.NotificationTemplates;
 using Notifications.Infrastructure.Persistence;
 using System;
@@ -43,9 +43,19 @@ namespace Notifications.Infrastructure.Repositories
         public async Task<IEnumerable<TemplateVersion>> GetActiveVersionsByTemplateAsync(Guid templateId)
         {
             return await _context.TemplateVersions
-                .Where(tv => tv.TemplateId == templateId && tv.Status == TemplateVersionStatus.Active)
+                .Where(tv => tv.TemplateId == templateId && tv.Category == NotificationTemplateVersionCategory.Active)
                 .OrderBy(tv => tv.Language)
-                .ThenByDescending(tv => tv.CreatedAt)
+                .ThenByDescending(tv => tv.Created)
+                .AsNoTracking()
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<TemplateVersion>> GetAllByTemplateIdAsync(Guid templateId)
+        {
+            return await _context.TemplateVersions
+                .Where(tv => tv.TemplateId == templateId)
+                .OrderBy(tv => tv.Language)
+                .ThenByDescending(tv => tv.Created)
                 .AsNoTracking()
                 .ToListAsync();
         }
