@@ -6,7 +6,7 @@ using Notifications.Api.Models.Email.Responses;
 using Notifications.Application.Handlers.Commands;
 using Notifications.Domain.Entities.Enums;
 
-namespace Notifications.Api.Controllers;
+namespace Notifications.Api.Controllers.Public;
 
 [ApiController]
 [Route("api/v1/emails")]
@@ -21,7 +21,7 @@ public sealed class EmailsController : ControllerBase
         _mapper = mapper;
     }
 
-    [HttpPost("send")]
+    [HttpPost("send/custom")]
     [ProducesResponseType(typeof(SendEmailResponse), StatusCodes.Status202Accepted)]
     public async Task<IActionResult> Send([FromBody] SendEmailRequest request, CancellationToken ct)
     {

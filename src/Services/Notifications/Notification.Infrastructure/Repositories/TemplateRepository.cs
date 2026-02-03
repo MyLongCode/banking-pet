@@ -19,6 +19,11 @@ namespace Notifications.Infrastructure.Repositories
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
+
+        public async Task<IEnumerable<NotificationTemplate>> GetAllAsync()
+        {
+            return await _context.NotificationTemplates.ToListAsync();
+        }
         public async Task AddAsync(NotificationTemplate notificationTemplate)
         {
             await _context.NotificationTemplates.AddAsync(notificationTemplate);

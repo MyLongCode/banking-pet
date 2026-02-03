@@ -12,5 +12,6 @@ namespace Notifications.Domain.Interfaces.NotificationTemplates
         Task<NotificationTemplate> FindByCodeAsync(string code);
         Task AddAsync(NotificationTemplate notificationTemplate);
         Task UpdateAsync(NotificationTemplate notificationTemplate);
+        Task<IEnumerable<NotificationTemplate>> GetAllAsync();
     }
 }
