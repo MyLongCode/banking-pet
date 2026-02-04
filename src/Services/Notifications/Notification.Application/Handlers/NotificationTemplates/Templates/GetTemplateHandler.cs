@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Notifications.Application.Handlers.Commands;
-using Notifications.Application.Handlers.Commands.Templates;
+using Notifications.Application.Handlers.Commands.Templates.NotificationTemplates;
 using Notifications.Domain.Entities;
 using Notifications.Domain.Entities.NotificationTemplates;
 using Notifications.Domain.Interfaces;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Notifications.Application.Handlers.Templates
+namespace Notifications.Application.Handlers.NotificationTemplates.Templates
 {
     public class GetTemplateHandler : IRequestHandler<GetTemplateQuery, TemplateVersion>
     {

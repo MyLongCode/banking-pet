@@ -38,6 +38,7 @@ namespace Notifications.Infrastructure.Extensions
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<ITemplateRepository, TemplateRepository>();
             services.AddScoped<ITemplateVersionRepository, TemplateVersionRepository>();
+            services.AddScoped<ITemplateVariableRepository, TemplateVariableRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<INotificationFactoryResolver>(sp =>

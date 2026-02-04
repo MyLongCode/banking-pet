@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Notifications.Application.Handlers.Commands.Templates
+namespace Notifications.Application.Handlers.Commands.Templates.TemplateVariables
 {
     public record ValidateVariablesCommand(
         TemplateVersion Template,

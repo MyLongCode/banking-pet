@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Notifications.Application.Handlers.Commands.Templates
+namespace Notifications.Application.Handlers.Commands.NotificationsTemplates.TemplateVariables
 {
-    public record GetAllTemplatesQuery() : IRequest<IEnumerable<NotificationTemplate>>;
+    public record GetTemplateVariablesQuery() : IRequest<IEnumerable<TemplateVariable>>;
 }

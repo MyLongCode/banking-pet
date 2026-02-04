@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Notifications.Application.Handlers.Commands.Templates
+namespace Notifications.Application.Handlers.Commands.Templates.TemplateVersions
 {
     public sealed record CreateTemplateVersionCommand(
         Guid TemplateId,

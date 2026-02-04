@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Notifications.Api.Models.Email.Responses;
 using Notifications.Application.Handlers.Commands;
 using Notifications.Application.Handlers.Commands.Templates;
+using Notifications.Application.Handlers.Commands.Templates.NotificationTemplates;
+using Notifications.Application.Handlers.Commands.Templates.TemplateVersions;
 using Notifications.Domain.Entities.Enums;
 using System.Threading.Tasks;
 

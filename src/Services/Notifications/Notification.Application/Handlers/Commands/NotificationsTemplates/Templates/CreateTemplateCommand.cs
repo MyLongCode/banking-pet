@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Notifications.Application.Handlers.Commands.Templates
+namespace Notifications.Application.Handlers.Commands.Templates.NotificationTemplates
 {
     public sealed record CreateTemplateCommand(
         string Code,

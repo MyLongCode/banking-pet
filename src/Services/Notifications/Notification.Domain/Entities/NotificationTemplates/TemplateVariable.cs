@@ -16,7 +16,5 @@ namespace Notifications.Domain.Entities.NotificationTemplates
         public string DisplayName { get; set; } //Сумма перевода, имя пользователя
         public JsonElement ValidationRules { get; set; } // например {"min": 0, "max": 1000000}
         public string Description { get; set; }
-        
-
     }
 }
