@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Notifications.Api.Models.Email.Requests;
 using Notifications.Api.Models.Email.Responses;
 using Notifications.Application.Handlers.Commands;
+using Notifications.Application.Handlers.Commands.Notifications;
 using Notifications.Domain.Entities.Enums;
 
 namespace Notifications.Api.Controllers.Public;
@@ -25,8 +26,15 @@ public sealed class EmailsController : ControllerBase
     [ProducesResponseType(typeof(SendEmailResponse), StatusCodes.Status202Accepted)]
     public async Task<IActionResult> Send([FromBody] SendEmailWithTemplateRequest request, CancellationToken ct)
     {
-        
-        return Accepted();
+        var id = await _mediator.Send(new CreateNotificationWithTemplateCommand(
+           To: request.To,
+           TemplateCode: request.TemplateCode,
+           Version: request.Version,
+           Language: request.Language,
+           Variables: request.Variables
+       ), ct);
+
+        return Accepted(id);
     }
 
     [HttpPost("send/custom")]

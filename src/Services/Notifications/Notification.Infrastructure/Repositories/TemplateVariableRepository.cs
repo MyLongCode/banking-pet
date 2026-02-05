@@ -62,7 +62,7 @@ namespace Notifications.Infrastructure.Repositories
         {
             return await _db.TemplateVariables
                 .AsNoTracking()
-                .Where(x => names.Contains(x.Name.ToLower()))
+                .Where(x => names.Contains(x.Name))
                 .OrderBy(x => x.Name)
                 .ToListAsync(ct);
         }
