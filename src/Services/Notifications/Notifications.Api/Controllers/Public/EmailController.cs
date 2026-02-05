@@ -21,9 +21,17 @@ public sealed class EmailsController : ControllerBase
         _mapper = mapper;
     }
 
+    [HttpPost("send")]
+    [ProducesResponseType(typeof(SendEmailResponse), StatusCodes.Status202Accepted)]
+    public async Task<IActionResult> Send([FromBody] SendEmailWithTemplateRequest request, CancellationToken ct)
+    {
+        
+        return Accepted();
+    }
+
     [HttpPost("send/custom")]
     [ProducesResponseType(typeof(SendEmailResponse), StatusCodes.Status202Accepted)]
-    public async Task<IActionResult> Send([FromBody] SendEmailRequest request, CancellationToken ct)
+    public async Task<IActionResult> SendCustom([FromBody] SendEmailRequest request, CancellationToken ct)
     {
         var correlationId = GetOrCreateCorrelationId();
 

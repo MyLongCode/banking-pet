@@ -58,6 +58,15 @@ namespace Notifications.Infrastructure.Repositories
                 .ToListAsync(ct);
         }
 
+        public async Task<IEnumerable<TemplateVariable>> GetAllByNamesAsync(IEnumerable<string> names, CancellationToken ct = default)
+        {
+            return await _db.TemplateVariables
+                .AsNoTracking()
+                .Where(x => names.Contains(x.Name.ToLower()))
+                .OrderBy(x => x.Name)
+                .ToListAsync(ct);
+        }
+
         public async Task<Guid> AddAsync(TemplateVariable variable, CancellationToken ct = default)
         {
             ArgumentNullException.ThrowIfNull(variable);

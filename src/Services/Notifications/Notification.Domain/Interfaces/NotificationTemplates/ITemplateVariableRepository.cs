@@ -14,6 +14,7 @@ namespace Notifications.Domain.Interfaces.NotificationTemplates
         Task<TemplateVariable?> GetByIdAsync(Guid id, CancellationToken ct = default);
         Task<TemplateVariable?> GetByNameAsync(string name, CancellationToken ct = default);
         Task<IReadOnlyList<TemplateVariable>> GetAllAsync(CancellationToken ct = default);
+        Task<IEnumerable<TemplateVariable>> GetAllByNamesAsync(IEnumerable<string> names, CancellationToken ct = default);
 
         Task<Guid> AddAsync(TemplateVariable variable, CancellationToken ct = default);
         Task UpdateAsync(TemplateVariable variable, CancellationToken ct = default);
