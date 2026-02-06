@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Notifications.Application.Handlers.Notifications
+namespace Notifications.Application.Features.Handlers.Notifications
 {
     public sealed class CreateBatchNotificationsHandler
     : IRequestHandler<CreateBatchNotificationsCommand, BatchNotificationResult>

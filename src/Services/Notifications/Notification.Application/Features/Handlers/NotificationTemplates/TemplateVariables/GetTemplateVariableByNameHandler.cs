@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Notifications.Application.Handlers.NotificationTemplates.TemplateVariables
+namespace Notifications.Application.Features.Handlers.NotificationTemplates.TemplateVariables
 {
     public class GetTemplateVariableByNameHandler : IRequestHandler<GetTemplateVariableByNameQuery, TemplateVariable?>
     {

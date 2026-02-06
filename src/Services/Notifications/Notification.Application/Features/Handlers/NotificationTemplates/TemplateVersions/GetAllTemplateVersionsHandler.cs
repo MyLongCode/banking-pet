@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Notifications.Application.Handlers.NotificationTemplates.TemplateVersions
+namespace Notifications.Application.Features.Handlers.NotificationTemplates.TemplateVersions
 {
     public class GetAllTemplateVersionsHandler : IRequestHandler<GetAllTemplateVersionsQuery, IEnumerable<TemplateVersion>>
     {

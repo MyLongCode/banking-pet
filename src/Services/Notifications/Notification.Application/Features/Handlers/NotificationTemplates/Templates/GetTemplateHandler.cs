@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Notifications.Application.Handlers.NotificationTemplates.Templates
+namespace Notifications.Application.Features.Handlers.NotificationTemplates.Templates
 {
     public class GetTemplateHandler : IRequestHandler<GetTemplateQuery, TemplateVersion>
     {
