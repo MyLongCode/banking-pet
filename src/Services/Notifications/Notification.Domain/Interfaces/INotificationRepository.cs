@@ -1,5 +1,6 @@
 ﻿using Notifications.Domain.Entities;
 using Notifications.Domain.Entities.Enums;
+using Notifications.Domain.ValueObjects.Analytics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,5 +22,8 @@ namespace Notifications.Domain.Interfaces
         Task UpdateAsync(Notification notification, CancellationToken cancellationToken = default);
         Task DeleteAsync(Guid id, CancellationToken cancellationToken = default);
         Task<bool> SaveChangesAsync(CancellationToken cancellationToken = default);
+
+        //Аналитика
+        Task<Dictionary<DateOnly, NotificationStatusesCount>> GetDateAnalytics(CancellationToken cancellation = default);
     }
 }

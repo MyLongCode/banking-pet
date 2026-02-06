@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Notifications.Application.Handlers.Queries.Analytics;
 using Notifications.Api.Models.Analytics.Responses;
 using Notifications.Application.Handlers.Commands.Analytics;
 

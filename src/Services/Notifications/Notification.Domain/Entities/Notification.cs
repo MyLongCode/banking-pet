@@ -20,6 +20,7 @@ namespace Notifications.Domain.Entities
         public bool IsSent { get; set; }
 
         public NotificationType Type { get; set; }
+        public NotificationStatus Status { get; set; }
 
         protected Notification() { }
 

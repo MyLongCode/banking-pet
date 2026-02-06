@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace Notifications.Application.Handlers.Commands.Analytics
 {
-    public record GetDailyAnalyticsQuery() : IRequest<DailyAnalyticsDTO>;
+    public record GetDailyAnalyticsQuery() : IRequest<IEnumerable<DailyAnalyticsDTO>>;
 }

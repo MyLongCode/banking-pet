@@ -2,6 +2,7 @@
 using Notifications.Domain.Entities;
 using Notifications.Domain.Entities.Enums;
 using Notifications.Domain.Interfaces;
+using Notifications.Domain.ValueObjects.Analytics;
 using Notifications.Infrastructure.Persistence;
 using System;
 using System.Collections.Generic;
@@ -100,6 +101,35 @@ namespace Notifications.Infrastructure.Repositories
         public async Task<bool> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             return await _context.SaveChangesAsync(cancellationToken) > 0;
+        }
+
+        public async Task<Dictionary<DateOnly, NotificationStatusesCount>> GetDateAnalytics(CancellationToken cancellation = default)
+        {
+            var notifications = await _context.Notifications
+            .Where(n => n.CreatedAt >= DateTime.UtcNow.AddMonths(-1))
+            .ToListAsync(cancellation);
+
+            var groupedByDate = notifications
+                .GroupBy(n => DateOnly.FromDateTime(n.CreatedAt))
+                .Select(g => new
+                {
+                    Date = g.Key,
+                    Sent = g.Count(n => n.Status == NotificationStatus.Sent),
+                    Failed = g.Count(n => n.Status == NotificationStatus.Failed),
+                    Delivered = g.Count(n => n.Status == NotificationStatus.Delivered)
+                })
+                .ToList();
+
+            var result = groupedByDate.ToDictionary(
+                g => g.Date,
+                g => new NotificationStatusesCount
+                {
+                    NotificationsSent = g.Sent,
+                    NotificationsFailed = g.Failed,
+                    NotificationsDelivered = g.Delivered
+                });
+
+            return result;
         }
     }
 }

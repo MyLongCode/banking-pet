@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace Notifications.Application.Handlers.Commands.Analytics
 {
-    public record GetCategoryAnalyticsQuery() : IRequest<CategoryAnalyticsDTO>;
+    public record GetCategoryAnalyticsQuery() : IRequest<IEnumerable<CategoryAnalyticsDTO>>;
 }
