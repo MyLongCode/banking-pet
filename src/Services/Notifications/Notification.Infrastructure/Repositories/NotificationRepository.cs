@@ -131,5 +131,34 @@ namespace Notifications.Infrastructure.Repositories
 
             return result;
         }
+
+        public async Task<Dictionary<NotificationType, NotificationStatusesCount>> GetChannelAnalytics(CancellationToken cancellation = default)
+        {
+            var notifications = await _context.Notifications
+               .Where(n => n.CreatedAt >= DateTime.UtcNow.AddMonths(-1))
+               .ToListAsync(cancellation);
+
+            var groupedByDate = notifications
+                .GroupBy(n => n.Type)
+                .Select(g => new
+                {
+                    Date = g.Key,
+                    Sent = g.Count(n => n.Status == NotificationStatus.Sent),
+                    Failed = g.Count(n => n.Status == NotificationStatus.Failed),
+                    Delivered = g.Count(n => n.Status == NotificationStatus.Delivered)
+                })
+                .ToList();
+
+            var result = groupedByDate.ToDictionary(
+                g => g.Date,
+                g => new NotificationStatusesCount
+                {
+                    NotificationsSent = g.Sent,
+                    NotificationsFailed = g.Failed,
+                    NotificationsDelivered = g.Delivered
+                });
+
+            return result;
+        }
     }
 }

@@ -25,5 +25,6 @@ namespace Notifications.Domain.Interfaces
 
         //Аналитика
         Task<Dictionary<DateOnly, NotificationStatusesCount>> GetDateAnalytics(CancellationToken cancellation = default);
+        Task<Dictionary<NotificationType, NotificationStatusesCount>> GetChannelAnalytics(CancellationToken cancellation = default);
     }
 }
