@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace Notifications.Application.Handlers.Commands.Analytics
 {
-    public record GetChannelAnalyticsQuery() : IRequest<ChannelAnalyticsDTO>;
+    public record GetChannelAnalyticsQuery() : IRequest<IEnumerable<ChannelAnalyticsDTO>>;
 }
